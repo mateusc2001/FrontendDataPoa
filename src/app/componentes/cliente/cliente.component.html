@@ -1,0 +1,48 @@
+<section id="container_principal_cliente">
+  <div id="formulario">
+    <h3>Cadastro de Clientes</h3>
+    <section class="example-form">
+      <mat-form-field class="element2">
+        <input matInput placeholder="Nome cliente" [(ngModel)]="nome">
+      </mat-form-field>
+      <h1>{{nome}}</h1>
+      <mat-form-field class="element2">
+        <input matInput placeholder="CNPJ" value="">
+      </mat-form-field>
+      <mat-form-field class="element3">
+        <input matInput placeholder="Endereço" value="">
+      </mat-form-field>
+      <mat-form-field class="element3">
+        <input matInput placeholder="Número" value="">
+      </mat-form-field>
+      <mat-form-field class="element3">
+        <input matInput placeholder="Complemento" value="">
+      </mat-form-field>
+      <mat-form-field class="element3">
+        <input matInput placeholder="Cidade" value="">
+      </mat-form-field>
+      <mat-form-field class="element3">
+        <input matInput placeholder="Bairro" value="">
+      </mat-form-field>
+      <mat-form-field class="element3">
+        <input matInput placeholder="UF" value="">
+      </mat-form-field>
+      <mat-form-field class="element2">
+        <input matInput placeholder="Fone" value="">
+      </mat-form-field>
+      <mat-form-field class="element2">
+        <input matInput placeholder="E-mail" value="">
+      </mat-form-field>
+      <div>
+        <button mat-raised-button color="primary">Salvar</button>
+        <button mat-raised-button color="warn">Cancelar</button>
+      </div>
+    </section>
+  </div>
+
+  <div id="container_map">
+    <agm-map [zoom]="zoom" [latitude]="lat" [longitude]="lng">
+      <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+    </agm-map>
+  </div>
+</section>

@@ -1,0 +1,26 @@
+<section id="container_principal_cliente">
+  <div id="formulario">
+    <h3>Cadastro de Linhas de Ônibus</h3>
+    <form class="example-form">
+      <mat-form-field class="element2">
+        <input matInput placeholder="ID linha" [(ngModel)]="baseObject.idLinha" [ngModelOptions]="{standalone: true}">
+      </mat-form-field>
+      <mat-form-field class="element2">
+        <input matInput placeholder="Código" [(ngModel)]="baseObject.codigo" [ngModelOptions]="{standalone: true}">
+      </mat-form-field>
+      <mat-form-field class="element1">
+        <input matInput placeholder="Nome linha" [(ngModel)]="baseObject.nome" [ngModelOptions]="{standalone: true}">
+      </mat-form-field>
+      <div>
+        <button mat-raised-button (click)="save()" color="primary">Salvar</button>
+        <button mat-raised-button color="warn">Cancelar</button>
+      </div>
+    </form>
+  </div>
+
+  <div id="container_map">
+    <agm-map [zoom]="zoom" [latitude]="lat" [longitude]="lng">
+      <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+    </agm-map>
+  </div>
+</section>
