@@ -31,7 +31,7 @@ export class LinhaOnibusComponent extends BaseComponent<LinhaOnibus> implements 
   constructor(private linhaOnibusService: LinhaOnibusService) {
     super();
     this.baseObject.location = new GeoJsonMultiPoint();
-  this.baseObject.location.coordinates = new Array<Coordenadas>();
+    this.baseObject.location.coordinates = new Array<Coordenadas>();
   }
 
   buscarCoords(object) {
@@ -42,8 +42,6 @@ export class LinhaOnibusComponent extends BaseComponent<LinhaOnibus> implements 
 
   adicionarCoords() {
     this.baseObject.location.coordinates.push(this.coordenadaBuscada);
-    
-    console.log(JSON.stringify(this.baseObject));
   }
 
   ngOnInit() {
@@ -54,7 +52,7 @@ export class LinhaOnibusComponent extends BaseComponent<LinhaOnibus> implements 
       this.baseObject = response.data;
       this.baseObject = new LinhaOnibus();
       this.baseObject.location = new GeoJsonMultiPoint();
-  this.baseObject.location.coordinates = new Array<Coordenadas>();
+      this.baseObject.location.coordinates = new Array<Coordenadas>();
     }, err => {
 
     });
