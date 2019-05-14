@@ -2,6 +2,11 @@
   <mat-toolbar color="primary">
     <mat-toolbar-row>
       <button id="map" mat-icon-button><i class="material-icons" (click)="sidenav.toggle()">menu</i></button>
+      <button mat-button [matMenuTriggerFor]="menu">Menu</button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item>Item 1</button>
+        <button mat-menu-item>Item 2</button>
+      </mat-menu>
       <span>Transporte</span>
     </mat-toolbar-row>
   </mat-toolbar>

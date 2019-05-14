@@ -1,10 +1,9 @@
-import { Coordenadas } from './coordenadas.model';
+import { Point } from 'geojson';
 
 export class LinhaOnibus{
     public linhaOnibusId: string;
     public idLinha: string;
     public codigo: string;
     public nome: string;
-    public coordenadas: Array<Coordenadas> = new Array();
-
+    public location: Array<Point> = new Array();
 }
