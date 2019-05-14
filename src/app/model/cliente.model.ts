@@ -3,7 +3,7 @@ import { LinhaOnibus } from './linhaOnibus.model';
 export class Cliente{
     public clienteId: string;
     public clienteNome: string;
-    public clienteCnpj: string;
+    public clienteCnpj: number;
     public endereco: string;
     public numero: number;
     public complemento: string;

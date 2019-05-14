@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ClienteComponent } from './componentes/cliente/cliente.component';
-import { AppComponent } from './app.component';
 import { LinhaOnibusComponent } from './componentes/linha-onibus/linha-onibus.component';
+import { ProcurarLinhasComponent } from './componentes/procurar-linhas/procurar-linhas.component';
 
 const routes: Routes = [
   {
@@ -16,6 +16,10 @@ const routes: Routes = [
   {
     path: 'linhaOnibus',
     component: LinhaOnibusComponent
+  },
+  {
+    path: 'procurarLinhas',
+    component: ProcurarLinhasComponent
   }
 ];
 

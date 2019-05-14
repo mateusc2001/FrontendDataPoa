@@ -3,39 +3,54 @@
     <h3>Cadastro de Clientes</h3>
     <section class="example-form">
       <mat-form-field class="element2">
-        <input matInput placeholder="Nome cliente" [(ngModel)]="nome">
-      </mat-form-field>
-      <h1>{{nome}}</h1>
-      <mat-form-field class="element2">
-        <input matInput placeholder="CNPJ" value="">
-      </mat-form-field>
-      <mat-form-field class="element3">
-        <input matInput placeholder="Endereço" value="">
-      </mat-form-field>
-      <mat-form-field class="element3">
-        <input matInput placeholder="Número" value="">
-      </mat-form-field>
-      <mat-form-field class="element3">
-        <input matInput placeholder="Complemento" value="">
-      </mat-form-field>
-      <mat-form-field class="element3">
-        <input matInput placeholder="Cidade" value="">
-      </mat-form-field>
-      <mat-form-field class="element3">
-        <input matInput placeholder="Bairro" value="">
-      </mat-form-field>
-      <mat-form-field class="element3">
-        <input matInput placeholder="UF" value="">
+        <input matInput placeholder="Nome cliente" [(ngModel)]="baseObject.clienteNome" name="clienteNome">
       </mat-form-field>
       <mat-form-field class="element2">
-        <input matInput placeholder="Fone" value="">
+        <input matInput placeholder="CNPJ" [(ngModel)]="baseObject.clienteCnpj" name="clienteCnpj" mask="00.000.000/0000-00">
+      </mat-form-field>
+      <mat-form-field class="element3">
+        <input matInput placeholder="Endereço" [(ngModel)]="baseObject.endereco" name="endereco">
+      </mat-form-field>
+      <mat-form-field class="element3">
+        <input matInput placeholder="Número" [(ngModel)]="baseObject.numero" name="numero" mask="00000000000000000000">
+      </mat-form-field>
+      <mat-form-field class="element3">
+        <input matInput placeholder="Complemento" [(ngModel)]="baseObject.complemento" name="complemento">
+      </mat-form-field>
+      <mat-form-field class="element3">
+        <input matInput placeholder="Cidade" [(ngModel)]="baseObject.cidade" name="cidade">
+      </mat-form-field>
+      <mat-form-field class="element3">
+        <input matInput placeholder="Bairro" [(ngModel)]="baseObject.bairro" name="bairro">
+      </mat-form-field>
+      <mat-form-field class="element3">
+        <input matInput placeholder="UF" [(ngModel)]="baseObject.uf" name="uf">
       </mat-form-field>
       <mat-form-field class="element2">
-        <input matInput placeholder="E-mail" value="">
+        <input matInput placeholder="Fone" [(ngModel)]="baseObject.fone" name="fone">
       </mat-form-field>
+      <mat-form-field class="element2">
+        <input matInput placeholder="E-mail" [(ngModel)]="baseObject.email" name="email">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Onibus Adicionados</mat-label>
+        <mat-select [(ngModel)]="linhaOnibus">
+          <mat-option *ngFor="let bus of listBus" [value]="bus">
+            {{bus.idLinha}} - {{bus.nome}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="element1">
+          <textarea matInput placeholder="Lista onibus" name="ListaOnibus"></textarea>
+          <li matInput placeholder="Lista onibus" name="ListaOnibus" *ngFor="let linhaOnibus of baseObject.linhaOnibus">
+              {{linhaOnibus.nome}}
+          </li>
+        </mat-form-field>
+
       <div>
-        <button mat-raised-button color="primary">Salvar</button>
+        <button mat-raised-button (click)="save()" color="primary">Salvar</button>
         <button mat-raised-button color="warn">Cancelar</button>
+        <button mat-raised-button (click)="change()" color="primary">Salvar</button>
       </div>
     </section>
   </div>
