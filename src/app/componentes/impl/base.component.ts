@@ -6,6 +6,10 @@ export abstract class BaseComponent<T> implements BaseInterfaceImpl {
 
   public abstract baseObject: T;
   public abstract getService(): InterfaceBaseService<T>;
+  public abstract listObject: Array<T>;
+  public page = 0;
+  public count = 10;
+
 
   constructor() { }
 
@@ -15,6 +19,12 @@ export abstract class BaseComponent<T> implements BaseInterfaceImpl {
     }, err => {
 
     });
+  }
+
+  findAll(page: number, count: number) {
+    this.getService().findAll(page, count).subscribe((response: ResponseApi) => {
+      this.listObject = response.data.content;
+    })
   }
 
   delete(id: string) {
@@ -29,7 +39,7 @@ export abstract class BaseComponent<T> implements BaseInterfaceImpl {
     this.getService().createOrUpdate(this.baseObject).subscribe((response: ResponseApi) => {
       this.baseObject = response.data;
     }, err => {
-      
+
     });
   }
 

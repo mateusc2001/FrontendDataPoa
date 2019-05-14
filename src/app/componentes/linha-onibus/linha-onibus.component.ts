@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { LinhaOnibus } from 'src/app/model/linhaOnibus.model';
 import { LinhaOnibusService } from 'src/app/services/linha-onibus.service';
 import { BaseComponent } from '../impl/base.component';
-import { Coordenadas } from 'src/app/model/coordenadas.model';
 import { ResponseApi } from 'src/app/model/responseApi.model';
-import { Point } from 'src/app/model/point.model';
+import { GeoJsonMultiPoint } from 'src/app/model/geoJsonMultiPoint';
+import { Coordenadas } from 'src/app/model/coordenadas.model';
 
 @Component({
   selector: 'app-linha-onibus',
@@ -12,10 +12,13 @@ import { Point } from 'src/app/model/point.model';
   styleUrls: ['./linha-onibus.component.scss']
 })
 export class LinhaOnibusComponent extends BaseComponent<LinhaOnibus> implements OnInit {
+  public listObject: LinhaOnibus[];
+
+
+  coordinates: Array<Coordenadas> = new Array<Coordenadas>();
 
   coordenadaBuscada: Coordenadas = new Coordenadas();
   public baseObject: LinhaOnibus = new LinhaOnibus();
-  points: Array<Point> = new Array<Point>();
 
   public getService() {
     return this.linhaOnibusService;
@@ -27,19 +30,20 @@ export class LinhaOnibusComponent extends BaseComponent<LinhaOnibus> implements 
 
   constructor(private linhaOnibusService: LinhaOnibusService) {
     super();
-
+    this.baseObject.location = new GeoJsonMultiPoint();
+  this.baseObject.location.coordinates = new Array<Coordenadas>();
   }
 
   buscarCoords(object) {
-    this.coordenadaBuscada = object.coords;
+    this.coordenadaBuscada = new Coordenadas();
+    this.coordenadaBuscada.x = object.coords.lat;
+    this.coordenadaBuscada.y = object.coords.lng;
   }
 
   adicionarCoords() {
-    let point: Point = new Point();
-    point.x = this.coordenadaBuscada.lat;
-    point.y = this.coordenadaBuscada.lng;
-    this.points.push(point)
-    console.log(this.points);
+    this.baseObject.location.coordinates.push(this.coordenadaBuscada);
+    
+    console.log(JSON.stringify(this.baseObject));
   }
 
   ngOnInit() {
@@ -48,10 +52,11 @@ export class LinhaOnibusComponent extends BaseComponent<LinhaOnibus> implements 
   save() {
     this.getService().createOrUpdate(this.baseObject).subscribe((response: ResponseApi) => {
       this.baseObject = response.data;
-      console.log(this.baseObject);
-    
+      this.baseObject = new LinhaOnibus();
+      this.baseObject.location = new GeoJsonMultiPoint();
+  this.baseObject.location.coordinates = new Array<Coordenadas>();
     }, err => {
-      
+
     });
   }
 }
