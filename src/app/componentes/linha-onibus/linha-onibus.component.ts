@@ -36,8 +36,8 @@ export class LinhaOnibusComponent extends BaseComponent<LinhaOnibus> implements 
 
   buscarCoords(object) {
     this.coordenadaBuscada = new Coordenadas();
-    this.coordenadaBuscada.x = object.coords.lat;
-    this.coordenadaBuscada.y = object.coords.lng;
+    this.coordenadaBuscada.lat = object.coords.lat;
+    this.coordenadaBuscada.lng = object.coords.lng;
   }
 
   adicionarCoords() {

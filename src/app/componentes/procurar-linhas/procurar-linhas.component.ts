@@ -4,6 +4,10 @@ import { LinhaOnibus } from 'src/app/model/linhaOnibus.model';
 import { LinhaOnibusService } from 'src/app/services/linha-onibus.service';
 import { Cliente } from 'src/app/model/cliente.model';
 import { ResponseApi } from 'src/app/model/responseApi.model';
+import { Location } from 'src/app/model/location.model';
+import { isNgTemplate } from '@angular/compiler';
+import { Coordenadas } from 'src/app/model/coordenadas.model';
+import { GeoJsonMultiPoint } from 'src/app/model/geoJsonMultiPoint';
 
 @Component({
   selector: 'app-procurar-linhas',
@@ -15,15 +19,20 @@ export class ProcurarLinhasComponent implements OnInit {
   lat: number = -30.059434;
   lng: number = -51.173111;
   zoom: number = 12;
-  raio: number = 10000;
-  public linhaOnibus: LinhaOnibus = new LinhaOnibus();
-  public listLinhas: LinhaOnibus[];
+  raio: number = 1000;
+  public origin: any;
+  public destination: any;
+  public waypoints: any = [];
+  public listLinhas: Array<LinhaOnibus> = new Array<LinhaOnibus>();
+
+  linhaOnibus: LinhaOnibus = new LinhaOnibus();
 
   public baseObject: Cliente = new Cliente();
 
 
-  constructor(private procuraLinhasService: ProcurarLinhasService, 
-    private linhaOnibusService: LinhaOnibusService) { }
+  constructor(private procuraLinhasService: ProcurarLinhasService) {
+
+  }
 
   ngOnInit() {
   }
@@ -43,12 +52,33 @@ export class ProcurarLinhasComponent implements OnInit {
   }
 
   listar() {
-    let raioTeste = this.raio/1000;
+    let raioTeste = this.raio / 1000;
     this.procuraLinhasService.listar(this.lat, this.lng, raioTeste).subscribe((response: ResponseApi) => {
-      this.listLinhas = response.data.content;
-      // this.baseObject.linhaOnibus = this.listLinhas = response.content.content;
-      console.log(JSON.stringify(this.listLinhas));
+      this.listLinhas = response.data;
     });
+  }
 
+  changeLinha(onibus) {
+
+    let arrayzao: any[] = new Array<any>();
+
+    this.procuraLinhasService.findById(onibus.id).subscribe((response: ResponseApi) => {
+      const ultimaCoordenada = response.data.location.coordinates.length;
+
+
+      for (let i = 0; i < ultimaCoordenada; i++) {
+        let location = {
+          location: {
+            lat: response.data.location.coordinates[i].x,
+            lng: response.data.location.coordinates[i].y
+          }
+        }
+        arrayzao.push(location);
+      }
+
+      this.waypoints = arrayzao;
+      this.origin = { lat: parseFloat(response.data.location.coordinates[0].x), lng: parseFloat(response.data.location.coordinates[0].y) };
+      this.destination = { lat: parseFloat(response.data.location.coordinates[ultimaCoordenada - 1].x), lng: parseFloat(response.data.location.coordinates[ultimaCoordenada - 1].y) };
+    })
   }
 }

@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ClienteComponent } from './componentes/cliente/cliente.component';
 import { AgmCoreModule, LAZY_MAPS_API_CONFIG } from '@agm/core';
+import { AgmDirectionModule } from 'agm-direction';
 import { LinhaOnibusComponent } from './componentes/linha-onibus/linha-onibus.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule, MatCheckboxModule } from '@angular/material';
@@ -27,6 +28,7 @@ import { ProcurarLinhasComponent } from './componentes/procurar-linhas/procurar-
     AppRoutingModule,
     HttpClientModule,
     AgmCoreModule.forRoot(),
+    AgmDirectionModule,
     BrowserAnimationsModule,
     MatButtonModule,
     MatCheckboxModule,

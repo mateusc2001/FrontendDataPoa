@@ -6,25 +6,24 @@
     <h1>{{lat}}</h1>
     <h1>{{lng}}</h1>
     <h1>{{raio}}</h1>
-    <button (click)="listar()">Meu guri</button>
+    <button (click)="listar()" >Meu guri</button>
 
     <ul>
-      <li *ngFor="let bus of listLinhas" value="bus">
-        {{bus.content.idLinha}} - {{bus.content.nome}}
+      <li *ngFor="let bus of listLinhas" value="bus" (click)="changeLinha(bus)">
+        {{bus.idlinha}} - {{bus.nome}}
       </li>
     </ul>
 
-    <!-- <ul>
-      <li *ngFor="let linha of linhasRaio">{{linha.nome}}</li>
-    </ul> -->
   </section>
   <section id="map">
     <agm-map [latitude]="lat" (mapClick)="buscarCoords($event)" [longitude]="lng" [zoom]="zoom">
-      <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
 
-      <agm-circle [latitude]="lat" [longitude]="lng" [radius]="raio" [fillColor]="red" [circleDraggable]="true"
+      <agm-circle [latitude]="lat" [longitude]="lng" [radius]="raio" [circleDraggable]="true"
         [editable]="true" (radiusChange)="radiusChange($event)" (centerChange)="centerChange($event)">
       </agm-circle>
+
+      <agm-direction [waypoints]="waypoints" [origin]="origin" [destination]="destination">
+      </agm-direction>
 
     </agm-map>
   </section>
