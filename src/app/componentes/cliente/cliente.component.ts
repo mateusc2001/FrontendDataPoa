@@ -12,7 +12,7 @@ import { LinhaOnibus } from 'src/app/model/linhaOnibus.model';
   styleUrls: ['./cliente.component.scss']
 })
 export class ClienteComponent extends BaseComponent<Cliente> implements OnInit {
- 
+
   public listObject: Cliente[];
   public listBus: LinhaOnibus[];
   public bus: any;
@@ -20,17 +20,15 @@ export class ClienteComponent extends BaseComponent<Cliente> implements OnInit {
 
   public baseObject: Cliente = new Cliente();
 
-  public getService(){
+  public getService() {
     return this.clienteService;
   }
 
   lat: number = -30.059434;
   lng: number = -51.173111;
   zoom: number = 12;
-  
-  nome: string;
 
-  constructor(private clienteService: ClienteService, private linhaOnibusService: LinhaOnibusService) { 
+  constructor(private clienteService: ClienteService, private linhaOnibusService: LinhaOnibusService) {
     super();
   }
 
@@ -41,12 +39,10 @@ export class ClienteComponent extends BaseComponent<Cliente> implements OnInit {
   loadCombo() {
     this.linhaOnibusService.findAll(0, 100).subscribe((response: ResponseApi) => {
       this.listBus = response.data.content;
-    }, err => {
- 
     });
   }
 
-  change(){
+  change() {
     this.baseObject.linhaOnibus.push(this.linhaOnibus);
   }
 
@@ -55,8 +51,7 @@ export class ClienteComponent extends BaseComponent<Cliente> implements OnInit {
       this.baseObject = response.data;
       this.baseObject = new Cliente();
       this.loadCombo();
-    }, err => {
-
     });
   }
+
 }

@@ -1,13 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ProcurarLinhasService } from 'src/app/services/procurar-linhas.service';
 import { LinhaOnibus } from 'src/app/model/linhaOnibus.model';
-import { LinhaOnibusService } from 'src/app/services/linha-onibus.service';
 import { Cliente } from 'src/app/model/cliente.model';
 import { ResponseApi } from 'src/app/model/responseApi.model';
-import { Location } from 'src/app/model/location.model';
-import { isNgTemplate } from '@angular/compiler';
-import { Coordenadas } from 'src/app/model/coordenadas.model';
-import { GeoJsonMultiPoint } from 'src/app/model/geoJsonMultiPoint';
 
 @Component({
   selector: 'app-procurar-linhas',
@@ -24,15 +19,9 @@ export class ProcurarLinhasComponent implements OnInit {
   public destination: any;
   public waypoints: any = [];
   public listLinhas: Array<LinhaOnibus> = new Array<LinhaOnibus>();
-
-  linhaOnibus: LinhaOnibus = new LinhaOnibus();
-
   public baseObject: Cliente = new Cliente();
 
-
-  constructor(private procuraLinhasService: ProcurarLinhasService) {
-
-  }
+  constructor(private procuraLinhasService: ProcurarLinhasService) { }
 
   ngOnInit() {
   }
@@ -60,11 +49,11 @@ export class ProcurarLinhasComponent implements OnInit {
 
   changeLinha(onibus) {
 
-    let arrayzao: any[] = new Array<any>();
+    let arrayParaWaypoints: any[] = new Array<any>();
 
     this.procuraLinhasService.findById(onibus.id).subscribe((response: ResponseApi) => {
-      const ultimaCoordenada = response.data.location.coordinates.length;
 
+      const ultimaCoordenada = response.data.location.coordinates.length;
 
       for (let i = 0; i < ultimaCoordenada; i++) {
         let location = {
@@ -73,12 +62,13 @@ export class ProcurarLinhasComponent implements OnInit {
             lng: response.data.location.coordinates[i].y
           }
         }
-        arrayzao.push(location);
+        arrayParaWaypoints.push(location);
       }
 
-      this.waypoints = arrayzao;
+      this.waypoints = arrayParaWaypoints;
       this.origin = { lat: parseFloat(response.data.location.coordinates[0].x), lng: parseFloat(response.data.location.coordinates[0].y) };
       this.destination = { lat: parseFloat(response.data.location.coordinates[ultimaCoordenada - 1].x), lng: parseFloat(response.data.location.coordinates[ultimaCoordenada - 1].y) };
     })
   }
+
 }

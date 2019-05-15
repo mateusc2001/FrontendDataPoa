@@ -32,7 +32,7 @@
       <mat-form-field class="element2">
         <input matInput placeholder="E-mail" [(ngModel)]="baseObject.email" name="email">
       </mat-form-field>
-      <mat-form-field>
+      <mat-form-field class="element2">
         <mat-label>Onibus Adicionados</mat-label>
         <mat-select [(ngModel)]="linhaOnibus">
           <mat-option *ngFor="let bus of listBus" [value]="bus">
@@ -40,7 +40,7 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
-      <mat-form-field class="element1">
+      <mat-form-field class="element2">
           <textarea matInput placeholder="Lista onibus" name="ListaOnibus"></textarea>
           <li matInput placeholder="Lista onibus" name="ListaOnibus" *ngFor="let linhaOnibus of baseObject.linhaOnibus">
               {{linhaOnibus.nome}}
@@ -50,14 +50,9 @@
       <div>
         <button mat-raised-button (click)="save()" color="primary">Salvar</button>
         <button mat-raised-button color="warn">Cancelar</button>
-        <button mat-raised-button (click)="change()" color="primary">Salvar</button>
+        <button mat-raised-button (click)="change()" color="primary">Adicionar na lista</button>
       </div>
     </section>
   </div>
 
-  <div id="container_map">
-    <agm-map [zoom]="zoom" [latitude]="lat" [longitude]="lng">
-      <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
-    </agm-map>
-  </div>
 </section>
