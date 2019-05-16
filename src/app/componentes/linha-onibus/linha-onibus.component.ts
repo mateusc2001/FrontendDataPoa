@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { LinhaOnibus } from 'src/app/model/linhaOnibus.model';
 import { LinhaOnibusService } from 'src/app/services/linha-onibus.service';
 import { BaseComponent } from '../impl/base.component';
@@ -13,7 +13,6 @@ import { Coordenadas } from 'src/app/model/coordenadas.model';
 })
 export class LinhaOnibusComponent extends BaseComponent<LinhaOnibus> implements OnInit {
   public listObject: LinhaOnibus[];
-
 
   coordinates: Array<Coordenadas> = new Array<Coordenadas>();
 

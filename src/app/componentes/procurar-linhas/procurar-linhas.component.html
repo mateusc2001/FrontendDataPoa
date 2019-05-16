@@ -1,57 +1,33 @@
 <section id="main_container">
   <section id="formulario">
-    <input type="number" [(ngModel)]="lat">
-    <input type="number" [(ngModel)]="lng">
-    <input type="number" [(ngModel)]="raio">
-    <h1>{{lat}}</h1>
-    <h1>{{lng}}</h1>
-    <h1>{{raio}}</h1>
-    <button (click)="listar()">Meu guri</button>
 
-    <ul>
-      <li *ngFor="let bus of listLinhas" value="bus" (click)="changeLinha(bus)">
-        {{bus.idlinha}} - {{bus.nome}}
-      </li>
-    </ul>
+    <table mat-table [dataSource]="listLinhas" class="mat-elevation-z8">
 
-    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-
-      <!--- Note that these columns can be defined in any order.
-              The actual rendered columns are set as a property on the row definition" -->
-
-      <!-- Position Column -->
-      <ng-container matColumnDef="position">
-        <th mat-header-cell *matHeaderCellDef> No. </th>
-        <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+      <ng-container matColumnDef="idlinha">
+        <th mat-header-cell *matHeaderCellDef> ID Da Linha</th>
+        <td mat-cell *matCellDef="let bus" (click)="changeLinha(bus)"> {{bus.idlinha}} </td>
       </ng-container>
 
-      <!-- Name Column -->
-      <ng-container matColumnDef="name">
+      <ng-container matColumnDef="codigo">
+        <th mat-header-cell *matHeaderCellDef> Código </th>
+        <td mat-cell *matCellDef="let bus" (click)="changeLinha(bus)"> {{bus.codigo}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="nome">
         <th mat-header-cell *matHeaderCellDef> Name </th>
-        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-      </ng-container>
-
-      <!-- Weight Column -->
-      <ng-container matColumnDef="weight">
-        <th mat-header-cell *matHeaderCellDef> Weight </th>
-        <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
-      </ng-container>
-
-      <!-- Symbol Column -->
-      <ng-container matColumnDef="symbol">
-        <th mat-header-cell *matHeaderCellDef> Symbol </th>
-        <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+        <td mat-cell *matCellDef="let bus" (click)="changeLinha(bus)"> {{bus.nome}} </td>
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      <tr mat-row *matRowDef="let myRowData; columns: displayedColumns;"></tr>
     </table>
-
-
+    <div>
+      <button mat-raised-button (click)="listar()" color="primary">Procurar</button>
+    </div>
 
   </section>
   <section id="map">
-    <agm-map [latitude]="lat" (mapClick)="buscarCoords($event)" [longitude]="lng" [zoom]="zoom">
+    <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" (mapClick)="buscarCoords($event)">
 
       <agm-circle [latitude]="lat" [longitude]="lng" [radius]="raio" [circleDraggable]="true" [editable]="true"
         (radiusChange)="radiusChange($event)" (centerChange)="centerChange($event)">
