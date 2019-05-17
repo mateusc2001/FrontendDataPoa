@@ -3,7 +3,7 @@
     <h3>Cadastro de Linhas de Ônibus</h3>
     <form class="example-form">
       <mat-form-field class="element2">
-        <input matInput placeholder="ID linha" [(ngModel)]="baseObject.idLinha" name="idlinha">
+        <input matInput placeholder="ID linha" [(ngModel)]="baseObject.idlinha" name="idlinha">
       </mat-form-field>
       <mat-form-field class="element2">
         <input matInput placeholder="Código" [(ngModel)]="baseObject.codigo" name="codigo">
@@ -27,7 +27,7 @@
 
   <div id="container_map">
     <agm-map (mapClick)="buscarCoords($event)" [zoom]="zoom" [latitude]="lat" [longitude]="lng">
-      <agm-marker [latitude]="this.coordenadaBuscada.x" [longitude]="this.coordenadaBuscada.y"></agm-marker>
+      <agm-marker [latitude]="this.coordenadaBuscada.lat" [longitude]="this.coordenadaBuscada.lng"></agm-marker>
     </agm-map>
   </div>
 </section>
