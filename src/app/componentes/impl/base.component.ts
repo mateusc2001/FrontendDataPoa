@@ -16,30 +16,23 @@ export abstract class BaseComponent<T> implements BaseInterfaceImpl {
   findById(id: string) {
     this.getService().findById(id).subscribe((response: ResponseApi) => {
       this.baseObject = response.data;
-    }, err => {
-
     });
   }
 
   findAll(page: number, count: number) {
     this.getService().findAll(page, count).subscribe((response: ResponseApi) => {
       this.listObject = response.data.content;
-    })
+    });
   }
 
   delete(id: string) {
     this.getService().delete(id).subscribe((response: ResponseApi) => {
-
-    }, err => {
-
     });
   }
 
   save() {
     this.getService().createOrUpdate(this.baseObject).subscribe((response: ResponseApi) => {
       this.baseObject = response.data;
-    }, err => {
-
     });
   }
 
